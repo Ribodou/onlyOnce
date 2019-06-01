@@ -1,0 +1,34 @@
+check why valgrind say 225 bytes in 4 blocks (apparently it is becuase of SDL)
+even with an empty program, it says:
+==15621==    definitely lost: 225 bytes in 4 blocks
+==15621==    indirectly lost: 1,728 bytes in 38 blocks
+==15621==      possibly lost: 0 bytes in 0 blocks
+==15621==    still reachable: 44,376 bytes in 466 blocks
+==15621==         suppressed: 0 bytes in 0 blocks
+==15621== Reachable blocks (those to which a pointer was found) are not shown.
+==15621== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==15621== 
+
+================================================================================
+Make an title screen and an intro that explain the game
+
+================================================================================
+Uses sounds ("crack" xhen the ice break, "plouf" when the player swim, "swip"
+when he slip, etc.)
+
+================================================================================
+Use a true of open source sprites for the player.
+
+================================================================================
+Handle the camera (ie keep the player at the center of the sreen by changing the offset in pixel)
+
+================================================================================
+Make a menu, that you can acces via the "tab" key, that shows the levels you can play. When clicking on it, one should be able to play that level.
+
+================================================================================
+Create some subclass for the Case class, ie separate the breakable part from the others.
+
+================================================================================
+Creat a HUD that display the number of cases left to break on this level.
+The HUD soudl also add the info on every "cross" (blocage) cases. This way, it
+will be possible to add others "cross" cases, and the player will be able to figure which Case will open first.
