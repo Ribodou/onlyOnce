@@ -4,7 +4,7 @@ LDFLAGS=-lSDL2 -lSDL2_ttf
 LDFLAGSPLUS=-lcwiid -lbluetooth -lSDL2_mixer
 
 EXEC=bin/main  # Nom du programme
-OBJECTS = tmp/main.o tmp/Level.o tmp/Case.o tmp/Player.o  # Objets nécessaires à la compilation
+OBJECTS = tmp/main.o tmp/Level.o tmp/Case.o tmp/Player.o tmp/Text.o # Objets nécessaires à la compilation
 
 all: tmp bin ${EXEC}
 

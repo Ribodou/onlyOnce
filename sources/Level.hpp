@@ -14,6 +14,7 @@
 class Level {
     protected:
         SDL_Renderer *pRenderer;
+        XCase *xcase;
         int nlevel;
         int width;
         int height;
@@ -21,7 +22,7 @@ class Level {
         int start_x, start_y;
         int casesLeftToBreak;
         int offset_in_pixel[2];
-        
+
         std::vector<std::vector<Case*> > cases;
     public:
         Level(SDL_Renderer *_pRenderer, int _nlevel, int x, int y);

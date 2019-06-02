@@ -80,7 +80,7 @@ std::string Case::getColor() {
 }
 
 
-void Case::draw(int x, int y) {
+void Case::innerDraw(int x, int y) {
     SDL_Rect dest = {
         x,
         y,
@@ -88,6 +88,11 @@ void Case::draw(int x, int y) {
         this->sprite->h,
     };
     SDL_RenderCopy(this->pRenderer, this->texture, NULL, &dest);
+}
+
+
+void Case::draw(int x, int y) {
+    this->innerDraw(x, y);
 }
 
 
@@ -107,4 +112,21 @@ bool Case::isBroken() {
         return true;
     }
     return false;
+}
+
+XCase::XCase(SDL_Renderer *_pRenderer, std::string _color) :
+    Case(_pRenderer, _color),
+    text(pRenderer, {0, 20}, 200, 80) {
+    this->text.set("         ");
+}
+
+void XCase::setCount(int count) {
+    std::string text_ = std::to_string(count);
+    std::cout << ":" << text_ << std::endl;
+    this->text.set(text_);
+}
+
+void XCase::draw(int x, int y) {
+    this->innerDraw(x, y);
+    this->text.draw(1);
 }

@@ -22,7 +22,8 @@ Level::Level(SDL_Renderer *_pRenderer, int _nlevel, int x, int y) : pRenderer(_p
         int tmpNColumn = 0;
         for(char& c : line) {
             if (c == 'X') {
-                temp.push_back(new Case(this->pRenderer, "noir"));
+                this->xcase = new XCase(this->pRenderer, "noir");
+                temp.push_back(this->xcase);
             } else if (c == 'D') {
                 temp.push_back(new Case(this->pRenderer, "depart"));
             } else if (c == 'G') {
@@ -32,12 +33,13 @@ Level::Level(SDL_Renderer *_pRenderer, int _nlevel, int x, int y) : pRenderer(_p
                 temp.push_back(new Case(this->pRenderer, "arrivee"));
             } else if (c == 'B') {
                 temp.push_back(new Case(this->pRenderer, "blocage"));
-            } else {  // \n
+            } else { // \n
                 temp.push_back(new Case(this->pRenderer, "blanc"));
             }
             // std::cout << c << " ";
             tmpNColumn += 1;
         }
+        this->xcase->setCount(this->casesLeftToBreak);
         if (nColumn == 0) {
             nColumn = tmpNColumn;
         } else if (nColumn > 0) {
@@ -72,6 +74,7 @@ Level::~Level() {
 
 
 void Level::draw() const {
+    std::cout << "new draw" << std::endl;
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
             if (this->cases[i][j] != NULL) {
@@ -110,7 +113,8 @@ bool Level::canPlayerMove(const Player &player, int player_input) const {
     } else if (player_input == 3) {
         i += 1;
     }
-    if ((this->cases[i][j]->getColor().compare("noir") != 0) && !(this->cases[i][j]->getColor().compare("blocage") == 0)) {
+    if (this->cases[i][j]->getColor().compare("noir") != 0 &&
+        this->cases[i][j]->getColor().compare("blocage") != 0) {
         return true;
     } else {
         return false;
@@ -130,12 +134,14 @@ void Level::walkOnCase(std::tuple<int, int> tuple) {
     std::tie(i, j) = tuple;
     this->cases[i][j]->use();
     this->casesLeftToBreak--;
-    if (this->casesLeftToBreak == 0) {
-        for (int i = 0; i < this->height; i++) {
-            for (int j = 0; j < this->width; j++) {
-                if (this->cases[i][j]->getColor().compare("blocage") == 0) {
+    for (int i = 0; i < this->height; i++) {
+        for (int j = 0; j < this->width; j++) {
+            if (this->cases[i][j]->getColor().compare("blocage") == 0) {
+                if (this->casesLeftToBreak == 0) {
                     delete this->cases[i][j];
                     this->cases[i][j] = new Case(pRenderer, "blanc");
+                } else {
+                    this->xcase->setCount(this->casesLeftToBreak);
                 }
             }
         }
