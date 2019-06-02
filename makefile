@@ -6,15 +6,18 @@ LDFLAGSPLUS=-lcwiid -lbluetooth -lSDL2_mixer
 EXEC=bin/main  # Nom du programme
 OBJECTS = tmp/main.o tmp/Level.o tmp/Case.o tmp/Player.o  # Objets nécessaires à la compilation
 
-all: ${EXEC}
+all: tmp bin ${EXEC}
 
 $(EXEC): $(OBJECTS)
 	$(CPP) $(CFLAGS) $(OBJECTS) -o $(EXEC) $(LDFLAGS)
 
+tmp bin:
+	mkdir $@
+
 tmp/%.o: sources/%.cpp  # sources/%.hpp
 	$(CPP) -c $(CFLAGS) $< -o $@
 
-clean:	
+clean:
 	rm -fr tmp/*.o
 
 mrproper: clean
