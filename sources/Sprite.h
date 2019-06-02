@@ -4,8 +4,8 @@
 # include <SDL2/SDL.h>
 
 struct sprite {
-	std::string color;
-	int used;
+    std::string color;
+    int used;
     SDL_Surface* sprite;
     SDL_Texture* texture;
 };

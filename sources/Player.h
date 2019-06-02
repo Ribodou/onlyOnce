@@ -12,8 +12,8 @@
 class Player {
     private:
         SDL_Renderer *pRenderer;
-		std::vector<SDL_Surface*> sprites;
-		std::vector<SDL_Texture*> textures;
+        std::vector<SDL_Surface*> sprites;
+        std::vector<SDL_Texture*> textures;
         int x, y;
         int n_animation;
         int case_i, case_j;
