@@ -39,7 +39,6 @@ Level::Level(SDL_Renderer *_pRenderer, int _nlevel, int x, int y) : pRenderer(_p
             // std::cout << c << " ";
             tmpNColumn += 1;
         }
-        this->xcase->setCount(this->casesLeftToBreak);
         if (nColumn == 0) {
             nColumn = tmpNColumn;
         } else if (nColumn > 0) {
@@ -56,6 +55,7 @@ Level::Level(SDL_Renderer *_pRenderer, int _nlevel, int x, int y) : pRenderer(_p
         }
         this->cases.push_back(temp);
     }
+    this->xcase->setCount(this->casesLeftToBreak);
     this->height = this->cases.size();
     this->width = nColumn;
 }
@@ -74,10 +74,10 @@ Level::~Level() {
 
 
 void Level::draw() const {
-    std::cout << "new draw" << std::endl;
     for (int i = 0; i < this->height; i++) {
         for (int j = 0; j < this->width; j++) {
             if (this->cases[i][j] != NULL) {
+                std::cout << "dessions une case du niveau" << std::endl;
                 this->cases[i][j]->draw(j*30+this->offset_in_pixel[0], i*30+this->offset_in_pixel[1]);
             }
         }

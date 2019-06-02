@@ -46,6 +46,7 @@ void setup(int width, int height, SDL_Window *&pWindow, SDL_Renderer *&pRenderer
 
 
 void draw(SDL_Renderer *&pRenderer, const Level &level, Player &player, Text &text) {
+    std::cout << "new draw" << std::endl;
     SDL_SetRenderDrawColor(pRenderer, 0, 50, 0, 255);
     SDL_RenderClear(pRenderer);
     text.draw(1);

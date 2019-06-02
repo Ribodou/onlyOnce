@@ -121,9 +121,7 @@ XCase::XCase(SDL_Renderer *_pRenderer, std::string _color) :
 }
 
 void XCase::setCount(int count) {
-    std::string text_ = std::to_string(count);
-    std::cout << ":" << text_ << std::endl;
-    this->text.set(text_);
+    this->text.set(std::to_string(count));
 }
 
 void XCase::draw(int x, int y) {
